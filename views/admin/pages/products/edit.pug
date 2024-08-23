@@ -1,0 +1,116 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+    +alert-error(5000)
+    +alert-success(5000)
+    h1(class="mb-4") Chinh sua san pham
+  
+    form(
+        action=`${prefixAdmin}/products/edit/${products._id}?_method=PATCH`
+        method="POST"
+        id="form-edit-product"
+        enctype="multipart/form-data"
+    )
+        div(class="form-group")
+            label(for="title") Tieu de
+            input(
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                value=products.title
+            ) 
+        div(class="form-group")
+            label(for="desc") Mo ta 
+            textarea(
+                class="form-control"
+                id="desc"
+                name="description"
+                rows="5"
+            ) #{products.description}
+        div(class="form-group")
+            label(for="price") Gia
+            input(
+                type="number"
+                class="form-control"
+                id="price"
+                name="price"
+                value=products.price
+                min="0"
+            )
+        div(class="form-group")
+            label(for="discount") % Giam gia
+            input(
+                type="number"
+                class="form-control"
+                id="discount"
+                name="discountPercentage"
+                value=products.discountPercentage
+                min="0"
+            ) 
+        div(class="form-group")
+            label(for="stock") So luong
+            input(
+                type="number"
+                class="form-control"
+                id="stock"
+                name="stock"
+                value=products.stock
+                min="0"
+            ) 
+        div(
+            class="form-group"
+            upload-image
+            )
+            label(for="thumbnail") Anh
+            input(
+                type="file"
+                class="form-control-file"
+                id="thumbnail"
+                name="thumbnail"
+                upload-image-input
+            ) 
+            img(
+                src=products.thumbnail
+                upload-image-preview
+                class="image-preview"
+                )
+        div(class="form-group")
+            label(for="position") Vi tri
+            input(
+                type="number"
+                class="form-control"
+                id="position"
+                name="position"
+                placeholder="Tu dong tang"
+                min="1"
+                value=products.position
+            ) 
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusActive"
+                name="status"
+                value="active"
+                checked=(products.status == "active" ? true : false)
+            )
+            lable(for="statusActive" class="form-check-label") Hoat dong
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusInActive"
+                name="status"
+                value="inactive"
+                checked=(products.status == "inactive" ? true : false)
+            )
+            lable(for="statusInActive" class="form-check-label") Dung hoat dong
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Cap nhat 
+
+    script(src="/admin/js/product.js")  
