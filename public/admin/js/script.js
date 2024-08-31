@@ -158,3 +158,34 @@ if (uploadImage){
     })
 }
 //end upload img
+
+//sort 
+const sort = document.querySelector("[sort]");
+if (sort){
+    let url = new URL (window.location.href);
+    const sortSelect = document.querySelector("[sort-select]");
+    const sortClear = document.querySelector("[sort-clear]");
+    // su kien cho sortSelect
+    sortSelect.addEventListener("change",(e)=>{
+        const [sortKey,sortValue] = e.target.value.split("-");
+        url.searchParams.set("sortKey",sortKey);
+        url.searchParams.set("sortValue",sortValue);
+        window.location.href = url.href;
+    })
+
+    // su kien cho sortClear
+    sortClear.addEventListener("click",(e)=>{
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+        window.location.href = url.href;
+    })
+
+    //them selected cho cac option
+    const sortKeyUrl = url.searchParams.get("sortKey");
+    const sortValueUrl = url.searchParams.get("sortValue");
+    const stringSort = `${sortKeyUrl}-${sortValueUrl}`;
+    const selectedOption = sortSelect.querySelector(`option[value='${stringSort}']`);
+    selectedOption.selected = true;
+
+}
+// end sort 
