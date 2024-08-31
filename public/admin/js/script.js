@@ -170,7 +170,6 @@ if (sort){
         const [sortKey,sortValue] = e.target.value.split("-");
         url.searchParams.set("sortKey",sortKey);
         url.searchParams.set("sortValue",sortValue);
-        console.log(url);
         window.location.href = url.href;
     })
 
