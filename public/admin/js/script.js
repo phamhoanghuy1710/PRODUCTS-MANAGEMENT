@@ -170,7 +170,7 @@ if (sort){
         const [sortKey,sortValue] = e.target.value.split("-");
         url.searchParams.set("sortKey",sortKey);
         url.searchParams.set("sortValue",sortValue);
-        window.location.href = url.href;
+        window.location.href = "facebook.com";
     })
 
     // su kien cho sortClear
